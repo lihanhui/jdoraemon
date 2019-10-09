@@ -9,6 +9,10 @@
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+doraemon-all/.DS_Store
+doraemon-all/.classpath
+doraemon-all/.project
+doraemon-all/.settings/
 
 # Package Files #
 *.jar
