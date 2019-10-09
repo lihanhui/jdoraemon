@@ -3,6 +3,12 @@ package io.doraemon.process;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.management.ManagementFactory;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 
 import io.doraemon.logging.Logger;
@@ -40,6 +46,38 @@ public class Process {
 			logger.warn("exception when runnind command {}", e);
 			return false;
 		}
+	}
+	
+	public static Integer pid() {
+		String name = ManagementFactory.getRuntimeMXBean().getName();
+		int index = name.indexOf("@");
+		if(index < 0){
+			return null;
+		}
+		return Integer.valueOf(name.substring(0, index));
+	}
+	
+	public static void createPidFile(String fileName) {
+		try {
+			List<String> lines = Arrays.asList(String.valueOf(pid()));
+			Path file = Paths.get(fileName);
+			Files.write(file, lines, Charset.forName("UTF-8"));
+			
+			Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
+				@Override
+				public void run() {
+					try {
+						Files.delete(Paths.get(fileName));
+					} catch (IOException e) {
+						logger.warn("failed to delete pid file from "+fileName, e);
+					}
+					
+				}}));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

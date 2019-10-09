@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
@@ -13,6 +14,11 @@ public class JsonUtil {
 	public static <T> T fromJson(String json, Class<T> clz){
 		Gson gson = new Gson();
 		return gson.fromJson(json, clz);
+	}
+	
+	public static <T> T fromJson(String json, Type type){
+		Gson gson = new Gson();
+		return gson.fromJson(json, type);
 	}
 	
 	public static <T> T fromJsonFile(String jsonFile, Class<T> clz){

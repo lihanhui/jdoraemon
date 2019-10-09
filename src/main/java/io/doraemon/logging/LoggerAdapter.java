@@ -6,7 +6,7 @@ public class LoggerAdapter implements Logger {
 	public LoggerAdapter(org.slf4j.Logger logger) {
 		super();
 		this.logger = logger;
-		this.level = LogLevel.INFO;
+		this.level = LogLevel.TRACE;
 	}
 
 	@Override
@@ -51,27 +51,27 @@ public class LoggerAdapter implements Logger {
 
 	@Override
 	public void debug(String msg) {
-		if(this.isDebugEnabled()) logger.debug(msg);
+		logger.debug(msg);
 	}
 
 	@Override
 	public void debug(String format, Object arg) {
-		if(this.isDebugEnabled()) logger.debug(format, arg);
+		logger.debug(format, arg);
 	}
 
 	@Override
 	public void debug(String format, Object arg1, Object arg2) {
-		if(this.isDebugEnabled()) logger.debug(format, arg1, arg2);
+		logger.debug(format, arg1, arg2);
 	}
 
 	@Override
 	public void debug(String format, Object... arguments) {
-		if(this.isDebugEnabled()) logger.debug(format, arguments);
+		logger.debug(format, arguments);
 	}
 
 	@Override
 	public void debug(String msg, Throwable t) {
-		if(this.isDebugEnabled()) logger.debug(msg, t);
+		logger.debug(msg, t);
 	}
 
 	@Override
@@ -81,27 +81,27 @@ public class LoggerAdapter implements Logger {
 
 	@Override
 	public void info(String msg) {
-		if(this.isInfoEnabled()) logger.info(msg);
+		logger.info(msg);
 	}
 
 	@Override
 	public void info(String format, Object arg) {
-		if(this.isInfoEnabled()) logger.info(format, arg);
+		logger.info(format, arg);
 	}
 
 	@Override
 	public void info(String format, Object arg1, Object arg2) {
-		if(this.isInfoEnabled()) logger.info(format, arg1, arg2);
+		logger.info(format, arg1, arg2);
 	}
 
 	@Override
 	public void info(String format, Object... arguments) {
-		if(this.isInfoEnabled()) logger.info(format, arguments);
+		logger.info(format, arguments);
 	}
 
 	@Override
 	public void info(String msg, Throwable t) {
-		if(this.isInfoEnabled()) logger.info(msg, t);
+		logger.info(msg, t);
 	}
 
 	@Override
@@ -111,27 +111,27 @@ public class LoggerAdapter implements Logger {
 
 	@Override
 	public void warn(String msg) {
-		if(this.isWarnEnabled()) logger.warn(msg);
+		logger.warn(msg);
 	}
 
 	@Override
 	public void warn(String format, Object arg) {
-		if(this.isWarnEnabled()) logger.warn(format, arg);
+		logger.warn(format, arg);
 	}
 
 	@Override
 	public void warn(String format, Object... arguments) {
-		if(this.isWarnEnabled()) logger.warn(format, arguments);
+		logger.warn(format, arguments);
 	}
 
 	@Override
 	public void warn(String format, Object arg1, Object arg2) {
-		if(this.isWarnEnabled()) logger.warn(format, arg1, arg2);
+		logger.warn(format, arg1, arg2);
 	}
 
 	@Override
 	public void warn(String msg, Throwable t) {
-		if(this.isWarnEnabled()) logger.warn(msg, t);
+		logger.warn(msg, t);
 	}
 
 	@Override
@@ -141,27 +141,27 @@ public class LoggerAdapter implements Logger {
 
 	@Override
 	public void error(String msg) {
-		if(this.isErrorEnabled()) logger.error(msg);
+		logger.error(msg);
 	}
 
 	@Override
 	public void error(String format, Object arg) {
-		if(this.isErrorEnabled()) logger.error(format, arg);
+		logger.error(format, arg);
 	}
 
 	@Override
 	public void error(String format, Object arg1, Object arg2) {
-		if(this.isErrorEnabled()) logger.error(format, arg1, arg2);
+		logger.error(format, arg1, arg2);
 	}
 
 	@Override
 	public void error(String format, Object... arguments) {
-		if(this.isErrorEnabled()) logger.error(format, arguments);
+		logger.error(format, arguments);
 	}
 
 	@Override
 	public void error(String msg, Throwable t) {
-		if(this.isErrorEnabled()) logger.error(msg, t);
+		logger.error(msg, t);
 	}
 
 	@Override

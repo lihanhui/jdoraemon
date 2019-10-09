@@ -28,8 +28,12 @@ public class Options {
 	@DynamicParameter(names = "-D", description = "dynamic options ...")
 	private Map<String, String> dynamicOptions = new HashMap<>() ;
 	
+	private static Options options = null;
+	public static Options getOptions(){
+		return options;
+	}
 	public static Options parseCmdLine(Class<? extends Options> clazz, String ...args) {
-		Options options = null;
+		//Options options = null;
 		try {
 			options = clazz.newInstance();
 			JCommander.newBuilder().acceptUnknownOptions(true).addObject(options).build().parse(args);
