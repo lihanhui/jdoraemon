@@ -13,6 +13,7 @@ doraemon-all/.DS_Store
 doraemon-all/.classpath
 doraemon-all/.project
 doraemon-all/.settings/
+doraemon-all/target/
 
 # Package Files #
 *.jar
