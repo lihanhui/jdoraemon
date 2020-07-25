@@ -5,7 +5,7 @@ import java.io.File;
 import io.doraemon.json.JsonUtil;
 
 public class Config {
-	private String confPath = "/etc/conf";
+	private String confPath = "./etc/conf";
 	private static Config config = null;
 	public static Config getConfig() {
 		return config;
