@@ -3,7 +3,7 @@ package io.doraemon.distributed.lock;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 
-public interface LeaseLock extends Lock{
+public interface LeaseLock extends Lock, LeaseLockAsync{
     /**
      * Returns name of object
      *
