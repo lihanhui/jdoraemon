@@ -11,12 +11,11 @@ import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64.Decoder;
 
-import io.doraemon.conf.Config;
 import io.doraemon.exception.DoraemonRuntimeException;
 import io.doraemon.logging.Logger;
 import io.doraemon.logging.LoggerFactory;
-import sun.misc.BASE64Decoder;
 
 public class RSAKey {
 	private static Logger logger = LoggerFactory.getLogger(RSAKey.class);
@@ -78,12 +77,12 @@ public class RSAKey {
 	 */
 	private RSAPublicKey toPublicKey(String publicKeyStr){
 		try {
-			BASE64Decoder base64Decoder= new BASE64Decoder();
-			byte[] buffer= base64Decoder.decodeBuffer(publicKeyStr);
+			Decoder base64Decoder= java.util.Base64.getMimeDecoder();
+			byte[] buffer= base64Decoder.decode(publicKeyStr);
 			KeyFactory keyFactory= KeyFactory.getInstance("RSA");
 			X509EncodedKeySpec keySpec= new X509EncodedKeySpec(buffer);
 			return (RSAPublicKey) keyFactory.generatePublic(keySpec);
-		} catch (NoSuchAlgorithmException|InvalidKeySpecException|IOException|NullPointerException e) {
+		} catch (NoSuchAlgorithmException|InvalidKeySpecException|NullPointerException e) {
 			logger.info("can not generate public key", e);
 			throw new DoraemonRuntimeException("can not generate public key",e);
 		} 
@@ -106,9 +105,11 @@ public class RSAKey {
 					continue;
 				}else{
 					sb.append(readLine);
-					sb.append('\r');
+					//sb.append('\r');
 				}
 			}
+			String str = sb.toString();
+			str = str.replace("\r\n", "");
 			privateKey = toPrivateKey(sb.toString());
 		} catch (IOException |NullPointerException e) {
 			logger.info("can not load private key", e);
@@ -125,12 +126,12 @@ public class RSAKey {
  
 	private RSAPrivateKey toPrivateKey(String privateKeyStr) {
 		try {
-			BASE64Decoder base64Decoder= new BASE64Decoder();
-			byte[] buffer= base64Decoder.decodeBuffer(privateKeyStr);
+			Decoder base64Decoder= java.util.Base64.getDecoder();
+			byte[] buffer= base64Decoder.decode(privateKeyStr);
 			PKCS8EncodedKeySpec keySpec= new PKCS8EncodedKeySpec(buffer);
 			KeyFactory keyFactory= KeyFactory.getInstance("RSA");
 			return (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
-		} catch (NoSuchAlgorithmException|InvalidKeySpecException|IOException|NullPointerException e) {
+		} catch (NoSuchAlgorithmException|InvalidKeySpecException|NullPointerException e) {
 			logger.info("can not generatre private key", e);
 			throw new DoraemonRuntimeException("can not generatre private key",e);
 		}

@@ -5,6 +5,8 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -28,8 +30,8 @@ public class RSACipher {
 		try {
 			cipher = Cipher.getInstance("RSA");
 			cipher.init(Cipher.ENCRYPT_MODE, rsaPublicKey);
-		    sun.misc.BASE64Encoder encoder = new sun.misc.BASE64Encoder();
-			return encoder.encode(cipher.doFinal(toencrypt.getBytes("UTF-8")));
+			Encoder encoder = java.util.Base64.getEncoder();
+			return encoder.encodeToString(cipher.doFinal(toencrypt.getBytes("UTF-8")));
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException |IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException e) {
 			logger.warn("failed to encrypt ", e);
 			return null;
@@ -40,9 +42,10 @@ public class RSACipher {
 		try {
 			cipher = Cipher.getInstance("RSA");
 			cipher.init(Cipher.DECRYPT_MODE, rsaPrivateKey);
-		    sun.misc.BASE64Encoder encoder = new sun.misc.BASE64Encoder();
-			return encoder.encode(cipher.doFinal(encrypted.getBytes("UTF-8")));
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException |IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException e) {
+		    Decoder decoder = java.util.Base64.getDecoder();
+		    ;
+			return new String(cipher.doFinal(decoder.decode(encrypted)));
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException |IllegalBlockSizeException | BadPaddingException e) {
 			logger.warn("failed to decrypt ", e);
 			return null;
 		}
@@ -50,5 +53,13 @@ public class RSACipher {
 	public static RSACipher newCipher(String rsaPublicKeyFile, String rsaPrivateKeyFile ) {
 		RSAKey key = RSAKey.createRSAKey(rsaPublicKeyFile, rsaPrivateKeyFile);
 		return new RSACipher(key.getPublicKey(), key.getPrivateKey());
+	}
+	public static void main(String[] args){
+		RSACipher newCipher = RSACipher.newCipher(
+				"/Users/lihanhui/work-banma/etc/key/public_test.key", 
+				"/Users/lihanhui/work-banma/etc/key/pkcs8_rsa_private_test.key");
+		String encrypted = newCipher.encrypt("127.0.0.1");
+		System.out.println(encrypted);
+		System.out.println(newCipher.decrypt(encrypted));
 	}
 }
