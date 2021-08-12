@@ -31,7 +31,8 @@ public class RSACipher {
 			cipher = Cipher.getInstance("RSA");
 			cipher.init(Cipher.ENCRYPT_MODE, rsaPublicKey);
 			Encoder encoder = java.util.Base64.getEncoder();
-			return encoder.encodeToString(cipher.doFinal(toencrypt.getBytes("UTF-8")));
+			byte[] bytes = cipher.doFinal(toencrypt.getBytes("UTF-8"));
+			return encoder.encodeToString(bytes);
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException |IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException e) {
 			logger.warn("failed to encrypt ", e);
 			return null;
