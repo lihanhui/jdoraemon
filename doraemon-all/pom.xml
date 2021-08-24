@@ -60,5 +60,16 @@
         </snapshotRepository>
     </distributionManagement>
 
+  <build>
+	  <resources>
+	    <resource>
+	        <directory>${basedir}/src/main/java</directory>
+	        <includes>
+	            <include>**/*.*</include>
+	        </includes>
+	        <filtering>false</filtering>
+	    </resource>
+	  </resources>
+  </build>
 </project>
 
