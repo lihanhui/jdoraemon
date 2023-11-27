@@ -7,3 +7,4 @@ release.properties
 .project
 .classpath
 .settings/
+/bin/
