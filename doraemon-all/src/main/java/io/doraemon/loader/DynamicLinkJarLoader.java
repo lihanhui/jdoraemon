@@ -1,4 +1,4 @@
-package main.java.io.doraemon.loader;
+package io.doraemon.loader;
 
 import java.io.File;
 import java.io.IOException;
