@@ -29,4 +29,36 @@ public class ByteUtil {
     	return convert3Bytes(b1, b2, b3);
     }
     
+    public static byte[] convertTo4BytesLe(int value) {
+    	byte[] bytes = new byte[4];
+    	bytes[0] = (byte)(value & 0xFF);
+    	bytes[1] = (byte)((value>>8) & 0xFF);
+    	bytes[2] = (byte)((value>>16) & 0xFF);
+    	bytes[3] = (byte)((value>>24) & 0xFF);
+    	return bytes;
+    }
+    
+    public static byte[] convertTo4BytesBe(int value) {
+    	byte[] bytes = new byte[4];
+    	bytes[3] = (byte)(value & 0xFF);
+    	bytes[2] = (byte)((value>>8) & 0xFF);
+    	bytes[1] = (byte)((value>>16) & 0xFF);
+    	bytes[0] = (byte)((value>>24) & 0xFF);
+    	return bytes;
+    }
+    
+    public static byte[] convertTo2BytesLe(int value) {
+    	byte[] bytes = new byte[4];
+    	bytes[0] = (byte)(value & 0xFF);
+    	bytes[1] = (byte)((value>>8) & 0xFF);
+    	return bytes;
+    }
+    
+    public static byte[] convertTo2BytesBe(int value) {
+    	byte[] bytes = new byte[4];
+    	bytes[1] = (byte)(value & 0xFF);
+    	bytes[0] = (byte)((value>>8) & 0xFF);
+    	return bytes;
+    }
+    
 }
