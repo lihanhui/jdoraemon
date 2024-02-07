@@ -57,8 +57,8 @@ public class RSACipher {
 	}
 	public static void main(String[] args){
 		RSACipher newCipher = RSACipher.newCipher(
-				"/Users/lihanhui/work-banma/etc/key/public_test.key", 
-				"/Users/lihanhui/work-banma/etc/key/pkcs8_rsa_private_test.key");
+				"/Users/lihanhui/work/etc/key/public_test.key", 
+				"/Users/lihanhui/work/etc/key/pkcs8_rsa_private_test.key");
 		String encrypted = newCipher.encrypt("127.0.0.1");
 		System.out.println(encrypted);
 		System.out.println(newCipher.decrypt(encrypted));
