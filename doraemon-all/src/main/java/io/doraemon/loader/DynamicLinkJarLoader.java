@@ -28,12 +28,14 @@ public class DynamicLinkJarLoader
         }
         try
         {
+        	NativeLibrary.addSearchPath(lib_name, temp_dir.getAbsolutePath());
             System.err.println ("Unpacking to: " + file.getAbsolutePath ().toString ());
-            if (file.exists ())
-                file.delete ();
+            if (file.exists ()) {
+                //file.delete ();
+            }
             InputStream link = (clazz.getResourceAsStream (lib_name));
             Files.copy (link, file.getAbsoluteFile ().toPath ());
-            NativeLibrary.addSearchPath(lib_name, temp_dir.getAbsolutePath());
+            
             return file.getAbsoluteFile ().toPath ();
         } catch (Exception io)
         {

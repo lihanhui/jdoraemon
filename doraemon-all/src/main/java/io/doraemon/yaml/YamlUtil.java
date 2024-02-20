@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
@@ -19,7 +20,7 @@ public class YamlUtil {
 
 	public static <T> T fromYaml(String yamlStr, Class<T> clz){
 		InputStream inputStream = new ByteArrayInputStream(yamlStr.getBytes());
-		Yaml yaml = new Yaml(new Constructor(clz));
+		Yaml yaml = new Yaml(new Constructor(clz, new LoaderOptions()));
 		return yaml.load(inputStream);
 	}
 	
@@ -27,7 +28,7 @@ public class YamlUtil {
 		InputStream inputStream;
 		try {
 			inputStream = new FileInputStream(new File(yamlFile));
-			Yaml yaml = new Yaml(new Constructor(clz));
+			Yaml yaml = new Yaml(new Constructor(clz, new LoaderOptions()));
 			return yaml.load(inputStream);
 		} catch (FileNotFoundException e) {
 			throw new DoraemonRuntimeException(e);
