@@ -1,4 +1,4 @@
-package io.doraemon.rsa;
+package io.doraemon.crypto;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
