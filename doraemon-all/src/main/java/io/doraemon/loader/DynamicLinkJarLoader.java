@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 import com.sun.jna.NativeLibrary;
-
 import com.sun.jna.Platform;
 
 
@@ -34,7 +34,7 @@ public class DynamicLinkJarLoader
                 //file.delete ();
             }
             InputStream link = (clazz.getResourceAsStream (lib_name));
-            Files.copy (link, file.getAbsoluteFile ().toPath ());
+            Files.copy (link, file.getAbsoluteFile ().toPath (), StandardCopyOption.REPLACE_EXISTING);
             return file.getAbsoluteFile ().toPath ();
         } catch (Exception io)
         {
