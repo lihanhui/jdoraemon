@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
 import com.sun.jna.NativeLibrary;
-
 import com.sun.jna.Platform;
 
 
@@ -29,14 +28,13 @@ public class DynamicLinkJarLoader
         }
         try
         {
-        	NativeLibrary.addSearchPath(lib_name, temp_dir.getAbsolutePath());
+            NativeLibrary.addSearchPath(lib_name, temp_dir.getAbsolutePath());
             System.err.println ("Unpacking to: " + file.getAbsolutePath ().toString ());
             if (file.exists ()) {
                 file.delete ();
             }
             InputStream link = (clazz.getResourceAsStream (lib_name));
             Files.copy (link, file.getAbsoluteFile ().toPath (), StandardCopyOption.REPLACE_EXISTING);
-            
             return file.getAbsoluteFile ().toPath ();
         } catch (Exception io)
         {

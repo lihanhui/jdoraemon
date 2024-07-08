@@ -1,4 +1,4 @@
-package io.doraemon.rsa;
+package io.doraemon.crypto;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
@@ -25,6 +25,7 @@ public class RSACipher {
 		this.rsaPublicKey = rsaPublicKey;
 		this.rsaPrivateKey = rsaPrivateKey;
 	}
+	
 	public String encrypt(String toencrypt) {
 	    Cipher cipher;
 		try {
@@ -37,7 +38,8 @@ public class RSACipher {
 			logger.warn("failed to encrypt ", e);
 			return null;
 		}
-	} 
+	}
+	
 	public String decrypt(String encrypted) {
 	    Cipher cipher;
 		try {
@@ -51,10 +53,12 @@ public class RSACipher {
 			return null;
 		}
 	}
+	
 	public static RSACipher newCipher(String rsaPublicKeyFile, String rsaPrivateKeyFile ) {
 		RSAKey key = RSAKey.createRSAKey(rsaPublicKeyFile, rsaPrivateKeyFile);
 		return new RSACipher(key.getPublicKey(), key.getPrivateKey());
 	}
+	
 	public static void main(String[] args){
 		RSACipher newCipher = RSACipher.newCipher(
 				"/Users/lihanhui/work/etc/key/public_test.key", 

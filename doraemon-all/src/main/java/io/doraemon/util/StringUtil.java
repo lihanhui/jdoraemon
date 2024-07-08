@@ -1,8 +1,9 @@
 package io.doraemon.util;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 
-public class StringUtils {
+public class StringUtil {
     // Performance testing notes (JDK 1.4, Jul03, scolebourne)
     // Whitespace:
     // Character.isWhitespace() is faster than WHITESPACE.indexOf()
@@ -44,7 +45,7 @@ public class StringUtils {
      * <p>This constructor is public to permit tools that require a JavaBean
      * instance to operate.</p>
      */
-    public StringUtils() {
+    public StringUtil() {
         super();
     }
 
@@ -87,7 +88,7 @@ public class StringUtils {
      * @return <code>true</code> if the String is not empty and not null
      */
     public static boolean isNotEmpty(String str) {
-        return !StringUtils.isEmpty(str);
+        return !StringUtil.isEmpty(str);
     }
 
     /**
@@ -135,7 +136,7 @@ public class StringUtils {
      * @since 2.0
      */
     public static boolean isNotBlank(String str) {
-        return !StringUtils.isBlank(str);
+        return !StringUtil.isBlank(str);
     }
 
     // Trim
@@ -2556,6 +2557,16 @@ public class StringUtils {
             return null;
         }
         return str.toLowerCase(locale);
+    }
+    
+    public static byte[] getBytes(String str, String charsetName) {
+    	try {
+			return str.getBytes(charsetName);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
     }
 
 }
