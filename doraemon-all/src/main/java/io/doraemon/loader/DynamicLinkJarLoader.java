@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 import com.sun.jna.NativeLibrary;
 
@@ -31,10 +32,10 @@ public class DynamicLinkJarLoader
         	NativeLibrary.addSearchPath(lib_name, temp_dir.getAbsolutePath());
             System.err.println ("Unpacking to: " + file.getAbsolutePath ().toString ());
             if (file.exists ()) {
-                //file.delete ();
+                file.delete ();
             }
             InputStream link = (clazz.getResourceAsStream (lib_name));
-            Files.copy (link, file.getAbsoluteFile ().toPath ());
+            Files.copy (link, file.getAbsoluteFile ().toPath (), StandardCopyOption.REPLACE_EXISTING);
             
             return file.getAbsoluteFile ().toPath ();
         } catch (Exception io)
