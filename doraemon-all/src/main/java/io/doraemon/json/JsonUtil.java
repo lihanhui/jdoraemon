@@ -38,8 +38,9 @@ public class JsonUtil {
 	
 	public static <T> void toJson(String jsonFile, T obj){
 		Gson gson = new Gson();
-		try {
-			gson.toJson(obj, new FileWriter(jsonFile));
+		try (FileWriter writer = new FileWriter(jsonFile)) {
+			String json = toJson(obj);
+			writer.write(json);
 		} catch (JsonIOException | IOException e) {
 			e.printStackTrace();
 		}

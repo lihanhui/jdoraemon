@@ -1,5 +1,6 @@
 package io.doraemon;
 
+import io.doraemon.json.JsonUtil;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -33,6 +34,9 @@ public class AppTest
      */
     public void testApp()
     {
-        assertTrue( true );
+    	//Example e = new Example("1", "2");
+    	//JsonUtil.toJson("d:\\e.json", e);
+    	//System.out.println(json);
+        //assertTrue( true );
     }
 }
