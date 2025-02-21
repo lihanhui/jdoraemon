@@ -23,9 +23,9 @@ public class JsonUtil {
 	
 	public static <T> T fromJsonFile(String jsonFile, Class<T> clz){
 		Gson gson = new Gson();
-		try {
-			return  gson.fromJson(new FileReader(jsonFile), clz);
-		} catch (JsonSyntaxException | JsonIOException| FileNotFoundException e) {
+		try (FileReader r = new FileReader(jsonFile)) {
+			return  gson.fromJson(r, clz);
+		} catch (JsonSyntaxException | JsonIOException| IOException e) {
 			e.printStackTrace();
 			return null;
 		} 
@@ -39,8 +39,8 @@ public class JsonUtil {
 	public static <T> void toJson(String jsonFile, T obj){
 		Gson gson = new Gson();
 		try (FileWriter writer = new FileWriter(jsonFile)) {
-			String json = toJson(obj);
-			writer.write(json);
+			gson.toJson(obj, writer);
+			writer.close();
 		} catch (JsonIOException | IOException e) {
 			e.printStackTrace();
 		}
